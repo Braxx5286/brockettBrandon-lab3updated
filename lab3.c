@@ -38,7 +38,7 @@ int is_board_valid(){
     
     
     // replace this comment with your code
-     isValidRow(char board[SIZE][SIZE], int row) {
+     isValidRow(char board[SIZE][SIZE], int row);{
     visited[SIZE + 1] = { false };
 
     for (int i = 0; i < SIZE; ++i) {
