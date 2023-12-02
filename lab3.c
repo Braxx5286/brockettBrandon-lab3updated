@@ -65,35 +65,35 @@ int is_board_valid(){
     tid = (pthread_t*) malloc(sizeof(int*) * NUM_OF_THREADS);   
     parameter = (param_struct*) malloc(sizeof(param_struct) * NUM_OF_THREADS);
     valid = (int*)malloc(27*sizeof(int));
-    int identity = 0;
+    int sudoku = 0;
     for (int spot = 0; spot < ROW_SIZE; spot++){
-        parameter[identity].id = identity;
-        parameter[identity].starting_row = spot;
-        parameter[identity].starting_col = 0;
-        parameter[identity].ending_col = COL_SIZE-1;
-        parameter[identity].ending_row = spot;
-        pthread_create(&(tid[identity]), NULL, board_piece, &parameter[identity]);
-        identity++;
+        parameter[sudoku].id = identity;
+        parameter[sudoku].starting_row = spot;
+        parameter[sudoku].starting_col = 0;
+        parameter[sudoku].ending_col = COL_SIZE-1;
+        parameter[sudoku].ending_row = spot;
+        pthread_create(&(tid[sudoku]), NULL, board_piece, &parameter[sudoku]);
+        sudoku ++;
     }
 
     for (int spot = 0; spot < COL_SIZE; spot++){
-        parameter[identity].id = identity;
-        parameter[identity].starting_row = 0;
-        parameter[identity].starting_col = spot;
-        parameter[identity].ending_col = spot;
-        parameter[identity].ending_row = ROW_SIZE-1;
-        pthread_create(&(tid[identity]), NULL, board_piece, &parameter[identity]);
-        identity++;
+        parameter[sudoku].id = identity;
+        parameter[sudoku].starting_row = 0;
+        parameter[sudoku].starting_col = spot;
+        parameter[sudoku].ending_col = spot;
+        parameter[sudoku].ending_row = ROW_SIZE-1;
+        pthread_create(&(tid[identity]), NULL, board_piece, &parameter[sudoku]);
+        sudoku++;
     }
     
     int horz = 0;
     int vert = 0;
     for (int spot = 0; spot < NUM_OF_SUBGRIDS; spot++){
-        parameter[identity].id = identity;
-        parameter[identity].starting_row = horz;
-        parameter[identity].starting_col = vert;
-        parameter[identity].ending_col = vert+2;
-        parameter[identity].ending_row = horz+2;
+        parameter[sudoku].id = sudoku;
+        parameter[sudoku].starting_row = horz;
+        parameter[sudoku].starting_col = vert;
+        parameter[sudoku].ending_col = vert+2;
+        parameter[sudoku].ending_row = horz+2;
         pthread_create(&(tid[identity]), NULL, board_piece, &parameter[identity]);
         identity++;
         if(vert == 6){
